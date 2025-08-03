@@ -8,7 +8,9 @@
 import SwiftUI
 
 @main
-struct earthquake_mapApp: App {
+struct EarthquakeMapApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()

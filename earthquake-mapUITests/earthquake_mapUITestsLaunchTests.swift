@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class earthquake_mapUITestsLaunchTests: XCTestCase {
+final class EarthquakeMapUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

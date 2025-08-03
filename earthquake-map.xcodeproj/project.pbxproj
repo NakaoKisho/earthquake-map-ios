@@ -6,6 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2010C8DA2E35F5E6008203C8 /* .swiftlint.yml in Sources */ = {isa = PBXBuildFile; fileRef = 2010C8D92E35F5D8008203C8 /* .swiftlint.yml */; };
+		26BC8F16090AA9B29A077377 /* Pods_earthquake_map_earthquake_mapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEED6AEEC5733493713F233 /* Pods_earthquake_map_earthquake_mapUITests.framework */; };
+		C1093A3B7E9922482CBF40F9 /* Pods_earthquake_mapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE434E3E08410D7CD0B529B2 /* Pods_earthquake_mapTests.framework */; };
+		F2D13F9C295F847B6CC94904 /* Pods_earthquake_map.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98B8F408E25695D3EF2C3E0 /* Pods_earthquake_map.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		2015DC212E31234A00BE418C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +31,37 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CEED6AEEC5733493713F233 /* Pods_earthquake_map_earthquake_mapUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_earthquake_map_earthquake_mapUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2010C8D92E35F5D8008203C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		2015DC132E31234700BE418C /* earthquake-map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "earthquake-map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2015DC202E31234A00BE418C /* earthquake-mapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "earthquake-mapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2015DC2A2E31234A00BE418C /* earthquake-mapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "earthquake-mapUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C271377DE4ADF315393D547 /* Pods-earthquake-mapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-earthquake-mapTests.debug.xcconfig"; path = "Target Support Files/Pods-earthquake-mapTests/Pods-earthquake-mapTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4617919553D5ADCD953B4732 /* Pods-earthquake-map-earthquake-mapUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-earthquake-map-earthquake-mapUITests.debug.xcconfig"; path = "Target Support Files/Pods-earthquake-map-earthquake-mapUITests/Pods-earthquake-map-earthquake-mapUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		648F2EC3E70AD34B1F5DE72A /* Pods-earthquake-map.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-earthquake-map.release.xcconfig"; path = "Target Support Files/Pods-earthquake-map/Pods-earthquake-map.release.xcconfig"; sourceTree = "<group>"; };
+		AE434E3E08410D7CD0B529B2 /* Pods_earthquake_mapTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_earthquake_mapTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5D5361D1F08A7A24A871037 /* Pods-earthquake-map.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-earthquake-map.debug.xcconfig"; path = "Target Support Files/Pods-earthquake-map/Pods-earthquake-map.debug.xcconfig"; sourceTree = "<group>"; };
+		BB38DE487A9751E7883DAA3E /* Pods-earthquake-mapTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-earthquake-mapTests.release.xcconfig"; path = "Target Support Files/Pods-earthquake-mapTests/Pods-earthquake-mapTests.release.xcconfig"; sourceTree = "<group>"; };
+		DF3145D81617216B7A37F7DD /* Pods-earthquake-map-earthquake-mapUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-earthquake-map-earthquake-mapUITests.release.xcconfig"; path = "Target Support Files/Pods-earthquake-map-earthquake-mapUITests/Pods-earthquake-map-earthquake-mapUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E98B8F408E25695D3EF2C3E0 /* Pods_earthquake_map.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_earthquake_map.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2010C8E02E361B76008203C8 /* Exceptions for "earthquake-map" folder in "earthquake-map" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2015DC122E31234700BE418C /* earthquake-map */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2015DC152E31234700BE418C /* earthquake-map */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2010C8E02E361B76008203C8 /* Exceptions for "earthquake-map" folder in "earthquake-map" target */,
+			);
 			path = "earthquake-map";
 			sourceTree = "<group>";
 		};
@@ -52,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2D13F9C295F847B6CC94904 /* Pods_earthquake_map.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1093A3B7E9922482CBF40F9 /* Pods_earthquake_mapTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26BC8F16090AA9B29A077377 /* Pods_earthquake_map_earthquake_mapUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,10 +108,13 @@
 		2015DC0A2E31234700BE418C = {
 			isa = PBXGroup;
 			children = (
+				2010C8D92E35F5D8008203C8 /* .swiftlint.yml */,
 				2015DC152E31234700BE418C /* earthquake-map */,
 				2015DC232E31234A00BE418C /* earthquake-mapTests */,
 				2015DC2D2E31234A00BE418C /* earthquake-mapUITests */,
 				2015DC142E31234700BE418C /* Products */,
+				67DEDB7D2F5EE0828567822B /* Pods */,
+				35368F573FCC5608DFE3CA35 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +128,29 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		35368F573FCC5608DFE3CA35 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E98B8F408E25695D3EF2C3E0 /* Pods_earthquake_map.framework */,
+				0CEED6AEEC5733493713F233 /* Pods_earthquake_map_earthquake_mapUITests.framework */,
+				AE434E3E08410D7CD0B529B2 /* Pods_earthquake_mapTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		67DEDB7D2F5EE0828567822B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B5D5361D1F08A7A24A871037 /* Pods-earthquake-map.debug.xcconfig */,
+				648F2EC3E70AD34B1F5DE72A /* Pods-earthquake-map.release.xcconfig */,
+				4617919553D5ADCD953B4732 /* Pods-earthquake-map-earthquake-mapUITests.debug.xcconfig */,
+				DF3145D81617216B7A37F7DD /* Pods-earthquake-map-earthquake-mapUITests.release.xcconfig */,
+				3C271377DE4ADF315393D547 /* Pods-earthquake-mapTests.debug.xcconfig */,
+				BB38DE487A9751E7883DAA3E /* Pods-earthquake-mapTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -99,9 +158,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2015DC342E31234A00BE418C /* Build configuration list for PBXNativeTarget "earthquake-map" */;
 			buildPhases = (
+				6926D129296BB5DD8FAB93AF /* [CP] Check Pods Manifest.lock */,
 				2015DC0F2E31234700BE418C /* Sources */,
 				2015DC102E31234700BE418C /* Frameworks */,
 				2015DC112E31234700BE418C /* Resources */,
+				DC0C637AF14F2F36691D4BBB /* [CP] Copy Pods Resources */,
+				2010C8D82E35F53E008203C8 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -111,8 +173,6 @@
 				2015DC152E31234700BE418C /* earthquake-map */,
 			);
 			name = "earthquake-map";
-			packageProductDependencies = (
-			);
 			productName = "earthquake-map";
 			productReference = 2015DC132E31234700BE418C /* earthquake-map.app */;
 			productType = "com.apple.product-type.application";
@@ -121,6 +181,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2015DC372E31234A00BE418C /* Build configuration list for PBXNativeTarget "earthquake-mapTests" */;
 			buildPhases = (
+				9B66C4A3B919C1F34E1895BD /* [CP] Check Pods Manifest.lock */,
 				2015DC1C2E31234A00BE418C /* Sources */,
 				2015DC1D2E31234A00BE418C /* Frameworks */,
 				2015DC1E2E31234A00BE418C /* Resources */,
@@ -134,8 +195,6 @@
 				2015DC232E31234A00BE418C /* earthquake-mapTests */,
 			);
 			name = "earthquake-mapTests";
-			packageProductDependencies = (
-			);
 			productName = "earthquake-mapTests";
 			productReference = 2015DC202E31234A00BE418C /* earthquake-mapTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -144,9 +203,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2015DC3A2E31234A00BE418C /* Build configuration list for PBXNativeTarget "earthquake-mapUITests" */;
 			buildPhases = (
+				B9DFB325A17212801B4EDF51 /* [CP] Check Pods Manifest.lock */,
 				2015DC262E31234A00BE418C /* Sources */,
 				2015DC272E31234A00BE418C /* Frameworks */,
 				2015DC282E31234A00BE418C /* Resources */,
+				38CD6E38D9E502F26FC4EA69 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -157,8 +218,6 @@
 				2015DC2D2E31234A00BE418C /* earthquake-mapUITests */,
 			);
 			name = "earthquake-mapUITests";
-			packageProductDependencies = (
-			);
 			productName = "earthquake-mapUITests";
 			productReference = 2015DC2A2E31234A00BE418C /* earthquake-mapUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -231,11 +290,141 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2010C8D82E35F53E008203C8 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint --fix\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		38CD6E38D9E502F26FC4EA69 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-earthquake-map-earthquake-mapUITests/Pods-earthquake-map-earthquake-mapUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-earthquake-map-earthquake-mapUITests/Pods-earthquake-map-earthquake-mapUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-earthquake-map-earthquake-mapUITests/Pods-earthquake-map-earthquake-mapUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6926D129296BB5DD8FAB93AF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-earthquake-map-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9B66C4A3B919C1F34E1895BD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-earthquake-mapTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B9DFB325A17212801B4EDF51 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-earthquake-map-earthquake-mapUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC0C637AF14F2F36691D4BBB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-earthquake-map/Pods-earthquake-map-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-earthquake-map/Pods-earthquake-map-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-earthquake-map/Pods-earthquake-map-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2015DC0F2E31234700BE418C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2010C8DA2E35F5E6008203C8 /* .swiftlint.yml in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +510,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -378,6 +568,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -390,16 +581,19 @@
 		};
 		2015DC352E31234A00BE418C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5D5361D1F08A7A24A871037 /* Pods-earthquake-map.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "earthquake-map/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -417,16 +611,19 @@
 		};
 		2015DC362E31234A00BE418C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 648F2EC3E70AD34B1F5DE72A /* Pods-earthquake-map.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "earthquake-map/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -444,10 +641,12 @@
 		};
 		2015DC382E31234A00BE418C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3C271377DE4ADF315393D547 /* Pods-earthquake-mapTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MARKETING_VERSION = 1.0;
@@ -462,10 +661,12 @@
 		};
 		2015DC392E31234A00BE418C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB38DE487A9751E7883DAA3E /* Pods-earthquake-mapTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MARKETING_VERSION = 1.0;
@@ -480,9 +681,11 @@
 		};
 		2015DC3B2E31234A00BE418C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4617919553D5ADCD953B4732 /* Pods-earthquake-map-earthquake-mapUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vegcale.earthquake-mapUITests";
@@ -496,9 +699,11 @@
 		};
 		2015DC3C2E31234A00BE418C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DF3145D81617216B7A37F7DD /* Pods-earthquake-map-earthquake-mapUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.vegcale.earthquake-mapUITests";

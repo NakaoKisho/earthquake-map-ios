@@ -1,0 +1,6 @@
+framework module Pods_earthquake_map_earthquake_mapUITests {
+  umbrella header "Pods-earthquake-map-earthquake-mapUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
