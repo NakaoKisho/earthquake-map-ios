@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		200E9A702E48280B00B91405 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 200E9A6F2E4827FB00B91405 /* Config.xcconfig */; };
 		2010C8DA2E35F5E6008203C8 /* .swiftlint.yml in Sources */ = {isa = PBXBuildFile; fileRef = 2010C8D92E35F5D8008203C8 /* .swiftlint.yml */; };
 		26BC8F16090AA9B29A077377 /* Pods_earthquake_map_earthquake_mapUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CEED6AEEC5733493713F233 /* Pods_earthquake_map_earthquake_mapUITests.framework */; };
 		C1093A3B7E9922482CBF40F9 /* Pods_earthquake_mapTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE434E3E08410D7CD0B529B2 /* Pods_earthquake_mapTests.framework */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		0CEED6AEEC5733493713F233 /* Pods_earthquake_map_earthquake_mapUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_earthquake_map_earthquake_mapUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		200E9A6F2E4827FB00B91405 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		2010C8D92E35F5D8008203C8 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		2015DC132E31234700BE418C /* earthquake-map.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "earthquake-map.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2015DC202E31234A00BE418C /* earthquake-mapTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "earthquake-mapTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 		2015DC0A2E31234700BE418C = {
 			isa = PBXGroup;
 			children = (
+				200E9A6F2E4827FB00B91405 /* Config.xcconfig */,
 				2010C8D92E35F5D8008203C8 /* .swiftlint.yml */,
 				2015DC152E31234700BE418C /* earthquake-map */,
 				2015DC232E31234A00BE418C /* earthquake-mapTests */,
@@ -273,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				200E9A702E48280B00B91405 /* Config.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +508,7 @@
 /* Begin XCBuildConfiguration section */
 		2015DC322E31234A00BE418C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 200E9A6F2E4827FB00B91405 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -568,6 +573,7 @@
 		};
 		2015DC332E31234A00BE418C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 200E9A6F2E4827FB00B91405 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;

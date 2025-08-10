@@ -13,7 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        GMSServices.provideAPIKey("")
+        guard let googleMapsKey = APIKeyManager.shared.apiKey(for: "GOOGLE_MAPS_API_KEY") else {
+            return true
+        }
+        
+        GMSServices.provideAPIKey(googleMapsKey)
         return true
     }
     
