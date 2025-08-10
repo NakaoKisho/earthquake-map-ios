@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        GMSServices.provideAPIKey("AIzaSyCSgVPolLeozPsSu9rdwk34e3A-z3ysxEo")
+        GMSServices.provideAPIKey("")
         return true
     }
     
