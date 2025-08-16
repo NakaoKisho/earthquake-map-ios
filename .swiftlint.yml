@@ -8,6 +8,7 @@ disabled_rules:
 - trailing_semicolon
 - trailing_whitespace
 - force_cast
+- switch_case_alignment
 
 # コードの記載のない改行を許可するため
 - trailing_whitespace

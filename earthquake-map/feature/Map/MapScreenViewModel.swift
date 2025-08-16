@@ -10,46 +10,63 @@ import Foundation
 import GoogleMaps
 
 final class MapScreenViewModel: ObservableObject {
-    @Published var markers: [GMSMarker] = []
+    @Published var uiState: MapScreenUIState = MapScreenUIState.loading
     
     private let earthquakeUsecase = EarthquakeFlowUsecase()
     var cancellables: Set<AnyCancellable> = []
     
     init() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+        DispatchQueue.main.async {
             self.earthquakeUsecase
                 .execute()
                 .sink(
                     receiveCompletion: { completion in
                         switch completion {
-                            case .failure: break
+                            case .failure:
+                                self.uiState = MapScreenUIState.failed
                             case .finished: break
                         }
                     },
                     receiveValue: { receiveValue in
-                        guard let jmaQuake = receiveValue.value else { return }
-                        
-                        let markers = jmaQuake.map { earthquakeInfo in
-                            let hypocenter = earthquakeInfo.earthquake.hypocenter
-                            let latitude = hypocenter?.latitude ?? 0.0
-                            let longitude = hypocenter?.longitude ?? 0.0
-                            
-                            return GMSMarker(
-                                position: CLLocationCoordinate2D(
-                                    latitude: latitude,
-                                    longitude: longitude
-                                )
-                            )
-                        }
-                        
-                        self.markers.append(contentsOf: markers)
+                        self.uiState = MapScreenUIState.succeed(
+                            earthquakes: receiveValue
+                        )
                     }
                 )
                 .store(in: &self.cancellables)
         }
     }
-    
-    func getEarthquakeData() {
-        
-    }
 }
+
+internal enum MapScreenUIState {
+    case loading
+    case failed
+    case succeed(earthquakes: [Earthquake])
+}
+
+ extension MapScreenUIState: Equatable {
+    static func == (lhs: MapScreenUIState, rhs: MapScreenUIState) -> Bool {
+        switch (lhs, rhs) {
+            case (loading, loading):
+                return true
+            case (loading, failed):
+                return false
+            case (loading, succeed):
+                return false
+                
+            case (failed, loading):
+                return false
+            case (failed, failed):
+                return true
+            case (failed, succeed):
+                return false
+                
+            case (succeed, loading):
+                return false
+            case (succeed, failed):
+                return false
+            case (succeed, succeed):
+                return true
+        }
+    }
+ }

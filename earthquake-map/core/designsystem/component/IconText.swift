@@ -8,7 +8,12 @@
 import SwiftUI
 import SwiftUICore
 
-struct IconText<LeadingImageContent, Content, TrailingImageContent>: View where LeadingImageContent: View, Content: View, TrailingImageContent: View {
+struct IconText<
+    LeadingImageContent, Content,
+    TrailingImageContent
+>: View where LeadingImageContent: View,
+              Content: View,
+              TrailingImageContent: View {
     let backgroundColor: Color
     @ViewBuilder let leadingImage: () -> LeadingImageContent
     @ViewBuilder let content: () -> Content

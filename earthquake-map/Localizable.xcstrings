@@ -18,7 +18,10 @@
         }
       }
     },
-    "Epicenter" : {
+    "Failed" : {
+
+    },
+    "Hypocenter" : {
       "extractionState" : "manual",
       "localizations" : {
         "ja" : {
@@ -45,6 +48,9 @@
           }
         }
       }
+    },
+    "Loading" : {
+
     },
     "Longitude of the earthquake" : {
       "extractionState" : "manual",
@@ -124,6 +130,9 @@
           }
         }
       }
+    },
+    "text.text" : {
+
     },
     "Time of the earthquake" : {
       "extractionState" : "manual",

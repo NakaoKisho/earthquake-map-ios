@@ -10,19 +10,28 @@ import GoogleMaps
 import SwiftUI
 
 struct MapScreenRoute: View {
+    @Binding var isLoading: Bool
     @ObservedObject private var viewModel = MapScreenViewModel()
     
     var body: some View {
         MapScreen(
-            markers: $viewModel.markers
+            isLoading: $isLoading,
+            uiState: $viewModel.uiState
         )
     }
 }
 
 private struct MapScreen: View {
-    @Binding var markers: [GMSMarker]
+    @Binding var isLoading: Bool
+    @Binding var uiState: MapScreenUIState
     @State var zoomInCenter = false
     @State var shouldShowBottomSheet = false
+    @State var markers = [GMSMarker(
+        position: CLLocationCoordinate2D(
+            latitude: 0.0,
+            longitude: 0.0
+        )
+    )]
     
     var body: some View {
         GeometryReader { geometry in
@@ -44,6 +53,16 @@ private struct MapScreen: View {
         }
         .sheet(isPresented: $shouldShowBottomSheet) {
             BottomSheet()
+        }
+        .onChange(of: uiState) {
+            switch uiState {
+                case MapScreenUIState.loading:
+                    isLoading = true
+                case MapScreenUIState.failed:
+                    isLoading = false
+                case MapScreenUIState.succeed(let text):
+                    isLoading = false
+            }
         }
     }
 }
@@ -87,7 +106,7 @@ private struct EarthquakeInfoSummaryCard: View {
             
             EarthquakeInfoCard(
                 imageName: "GIFillMapPin",
-                title: "Epicenter",
+                title: "Hypocenter",
                 subtitle: subtitle1
             )
             
@@ -122,7 +141,7 @@ private struct BottomSheet: View {
             
             EarthquakeInfoCard(
                 imageName: "GIFillMapPin",
-                title: "Epicenter",
+                title: "Hypocenter",
                 subtitle: subtitle1
             )
             
@@ -311,5 +330,9 @@ private struct ExpandableEarthquakeInfoCard: View {
 }
 
 #Preview {
-    MapScreenRoute()
+    @Previewable @State var isLoading = false
+    
+    MapScreenRoute(
+        isLoading: $isLoading
+    )
 }
