@@ -11,8 +11,9 @@ import SwiftUI
 struct MapViewControllerBridge: UIViewControllerRepresentable {    
     var markers: [GMSMarker]?
     var mapViewWillMove: (Bool) -> Void
+    var proxy: ScrollViewProxy
     
-    @Binding var cameraPosition: GMSCameraPosition
+    @Binding var cameraPosition: GMSCameraPosition?
     @Binding var earthquakes: [Earthquake]?
     @Binding var selectedEarthquake: Earthquake?
     @Binding var shouldShowBottomSheet: Bool
@@ -31,22 +32,18 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
         )
     }
     
-    static func getCameraPosition(
-        location: CLLocationCoordinate2D?
-    ) -> GMSCameraPosition {
-        guard let location else {
-            return getDefaultCameraPosition()
-        }
-        
-        return GMSCameraPosition.camera(
-            withTarget: location,
-            zoom: defaultCameraZoom
-        )
-    }
-    
     func makeUIViewController(context: Context) -> MapViewController {
         let uiViewController = MapViewController()
-        uiViewController.map.camera = cameraPosition
+        
+        let defaultCameraPosition = CLLocationCoordinate2D(
+            latitude: 35.6764,
+            longitude: 139.6500
+        )
+        uiViewController.map.camera = GMSCameraPosition.camera(
+            withTarget: defaultCameraPosition,
+            zoom: MapViewControllerBridge.defaultCameraZoom
+        )
+        
         uiViewController.map.delegate = context.coordinator
         
         return uiViewController
@@ -58,6 +55,10 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
     }
     
     private func moveCamera(uiViewController: MapViewController) {
+        guard let cameraPosition else {
+            return
+        }
+        
         CATransaction.begin()
         CATransaction.setValue(NSNumber(value: 0.5), forKey: kCATransactionAnimationDuration)
         uiViewController.map.animate(to: cameraPosition)
@@ -91,6 +92,7 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
         
         func mapView(_ mapView: GMSMapView, didTap didTapMarker: GMSMarker) -> Bool {
             updateSelectedEarthquake(didTapMarker: didTapMarker)
+            scrollTo()
             self.mapViewControllerBridge.shouldShowBottomSheet = true
             
             return false
@@ -111,6 +113,13 @@ struct MapViewControllerBridge: UIViewControllerRepresentable {
                 currentPosition.longitude == tappedPosition.longitude
             }
             self.mapViewControllerBridge.selectedEarthquake = selected
+        }
+        
+        private func scrollTo() {
+            let itemPosition = self.mapViewControllerBridge.selectedEarthquake?.id
+            withAnimation {
+                self.mapViewControllerBridge.proxy.scrollTo(itemPosition, anchor: .center)
+            }
         }
     }
 }

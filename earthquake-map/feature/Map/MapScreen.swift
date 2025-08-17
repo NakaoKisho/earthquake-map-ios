@@ -32,7 +32,7 @@ private struct MapScreen: View {
     @Binding var snackbarMessage: String
     @Binding var uiState: MapScreenUIState
     
-    @State var cameraPosition = MapViewControllerBridge.getDefaultCameraPosition()
+    @State var cameraPosition: GMSCameraPosition?
     @State var earthquakes: [Earthquake]?
     @State var selectedEarthquake: Earthquake?
     @State var zoomInCenter = false
@@ -50,26 +50,29 @@ private struct MapScreen: View {
     
     var body: some View {
         GeometryReader { geometry in
-            VStack {
-                MapViewControllerBridge(
-                    markers: markers,
-                    mapViewWillMove: { (isGesture) in
-                        guard isGesture else { return }
-                        self.zoomInCenter = false
-                    },
-                    cameraPosition: $cameraPosition,
-                    earthquakes: $earthquakes,
-                    selectedEarthquake: $selectedEarthquake,
-                    shouldShowBottomSheet: $shouldShowBottomSheet
-                )
-                .overlay(alignment: .bottom) {
-                    if let earthquakes = Binding($earthquakes) {
-                        BottomList(
-                            cameraPosition: $cameraPosition,
-                            earthquakes: earthquakes,
-                            selectedEarthquake: $selectedEarthquake,
-                            shouldShowBottomSheet: $shouldShowBottomSheet
-                        )
+            ScrollViewReader { proxy in
+                VStack {
+                    MapViewControllerBridge(
+                        markers: markers,
+                        mapViewWillMove: { (isGesture) in
+                            guard isGesture else { return }
+                            self.zoomInCenter = false
+                        },
+                        proxy: proxy,
+                        cameraPosition: $cameraPosition,
+                        earthquakes: $earthquakes,
+                        selectedEarthquake: $selectedEarthquake,
+                        shouldShowBottomSheet: $shouldShowBottomSheet
+                    )
+                    .overlay(alignment: .bottom) {
+                        if let earthquakes = Binding($earthquakes) {
+                            BottomList(
+                                cameraPosition: $cameraPosition,
+                                earthquakes: earthquakes,
+                                selectedEarthquake: $selectedEarthquake,
+                                shouldShowBottomSheet: $shouldShowBottomSheet
+                            )
+                        }
                     }
                 }
             }
@@ -99,7 +102,7 @@ private struct MapScreen: View {
 }
 
 private struct BottomList: View {
-    @Binding var cameraPosition: GMSCameraPosition
+    @Binding var cameraPosition: GMSCameraPosition?
     @Binding var earthquakes: [Earthquake]
     @Binding var selectedEarthquake: Earthquake?
     @Binding var shouldShowBottomSheet: Bool
@@ -107,7 +110,10 @@ private struct BottomList: View {
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack {
-                ForEach($earthquakes) { earthquake in
+                ForEach(
+                    Array($earthquakes.enumerated()),
+                    id: \.element.id
+                ) { index, earthquake in
                     EarthquakeInfoSummaryCard(
                         cameraPosition: $cameraPosition,
                         earthquake: earthquake,
@@ -127,7 +133,7 @@ private struct BottomList: View {
 }
 
 private struct EarthquakeInfoSummaryCard: View {
-    @Binding var cameraPosition: GMSCameraPosition
+    @Binding var cameraPosition: GMSCameraPosition?
     @Binding var earthquake: Earthquake
     @Binding var selectedEarthquake: Earthquake?
     @Binding var shouldShowBottomSheet: Bool
@@ -172,11 +178,17 @@ private struct EarthquakeInfoSummaryCard: View {
         )
         .onTapGesture {
             selectedEarthquake = $earthquake.wrappedValue
-            cameraPosition = MapViewControllerBridge.getCameraPosition(
-                location: $earthquake.wrappedValue.hypocenter?.marker?.position
-            )
+            if let position = $earthquake.wrappedValue.hypocenter {
+                if let marker = position.marker {
+                    cameraPosition = GMSCameraPosition.camera(
+                        withTarget: marker.position,
+                        zoom: marker.map?.camera.zoom ?? MapViewControllerBridge.defaultCameraZoom
+                    )
+                }
+            }
             shouldShowBottomSheet = true
         }
+        .id(earthquake.id)
     }
 }
 
