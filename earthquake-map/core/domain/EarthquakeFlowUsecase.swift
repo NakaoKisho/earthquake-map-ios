@@ -13,7 +13,7 @@ import GoogleMaps
 final class EarthquakeFlowUsecase {
     func execute() -> Publishers.Map<AnyPublisher<[JMAQuake], AFError>, [Earthquake]> {
         return P2PquakeRepository().getEarthquake().value().map { jmaQuakes in
-            return jmaQuakes.map { jmaQuake in
+            jmaQuakes.map { jmaQuake in
                 let jmaHypocenter = jmaQuake.earthquake.hypocenter
                 let hypocenter = Hypocenter(
                     time: jmaQuake.earthquake.time,
@@ -24,7 +24,7 @@ final class EarthquakeFlowUsecase {
                     marker: getMarker(jmaHypocenter: jmaHypocenter)
                 )
                 let points = jmaQuake.points?.map { point in
-                    return ObservationPoint(
+                    ObservationPoint(
                         name: point.addr,
                         scale: String(point.scale)
                     )

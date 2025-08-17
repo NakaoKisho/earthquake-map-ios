@@ -16,6 +16,12 @@ final class MapScreenViewModel: ObservableObject {
     var cancellables: Set<AnyCancellable> = []
     
     init() {
+        renew()
+    }
+    
+    func renew() {
+        uiState = .loading
+        
         DispatchQueue.main.async {
             self.earthquakeUsecase
                 .execute()
@@ -23,12 +29,12 @@ final class MapScreenViewModel: ObservableObject {
                     receiveCompletion: { completion in
                         switch completion {
                             case .failure:
-                                self.uiState = MapScreenUIState.failed
+                                self.uiState = .failed
                             case .finished: break
                         }
                     },
                     receiveValue: { receiveValue in
-                        self.uiState = MapScreenUIState.succeed(
+                        self.uiState = .succeed(
                             earthquakes: receiveValue
                         )
                     }

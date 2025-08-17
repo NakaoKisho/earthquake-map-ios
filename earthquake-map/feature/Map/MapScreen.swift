@@ -13,8 +13,9 @@ struct MapScreenRoute: View {
     @Binding var isLoading: Bool
     @Binding var isSnackbarReady: Bool
     @Binding var snackbarMessage: String
+    @Binding var shouldRenew: Bool
     
-    @ObservedObject private var viewModel = MapScreenViewModel()
+    @StateObject private var viewModel = MapScreenViewModel()
     
     var body: some View {
         MapScreen(
@@ -23,6 +24,12 @@ struct MapScreenRoute: View {
             snackbarMessage: $snackbarMessage,
             uiState: $viewModel.uiState
         )
+        .onChange(of: shouldRenew) {
+            if !shouldRenew { return }
+            
+            viewModel.renew()
+            shouldRenew = false
+        }
     }
 }
 
@@ -88,13 +95,20 @@ private struct MapScreen: View {
         .onChange(of: uiState) {
             switch uiState {
                 case MapScreenUIState.loading:
-                    isLoading = true
+                    withAnimation(.easeInOut(duration: 10)) {
+                        isLoading = true
+                    }
                 case MapScreenUIState.failed:
-                    isLoading = false
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isLoading = false
+                    }
                     isSnackbarReady = true
                     snackbarMessage = "Unexpected error"
                     
                 case MapScreenUIState.succeed(let earthquakes):
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        isLoading = false
+                    }
                     self.earthquakes = earthquakes
             }
         }
@@ -378,10 +392,12 @@ private struct ExpandableEarthquakeInfoCard: View {
     @Previewable @State var isLoading = false
     @Previewable @State var isSnackbarReady = false
     @Previewable @State var snackbarMessage = ""
+    @Previewable @State var shouldRenew = false
     
     MapScreenRoute(
         isLoading: $isLoading,
         isSnackbarReady: $isSnackbarReady,
-        snackbarMessage: $snackbarMessage
+        snackbarMessage: $snackbarMessage,
+        shouldRenew: $shouldRenew
     )
 }

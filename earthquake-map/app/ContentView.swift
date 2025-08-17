@@ -12,19 +12,29 @@ struct ContentView: View {
     @State var isSnackbarReady = false
     @State var message = ""
     @State var duration = Snackbar.Duration.short
+    @State var shouldRenew = false
     
     var body: some View {
         NavigationStack {
             MapScreenRoute(
                 isLoading: $isLoading,
                 isSnackbarReady: $isSnackbarReady,
-                snackbarMessage: $message
+                snackbarMessage: $message,
+                shouldRenew: $shouldRenew,
             )
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Image(
                         isLoading ? "GIProgressActivity" : "GIRefresh"
                     )
+                    .rotationEffect(
+                        Angle(
+                            degrees: isLoading ? 90 : 0
+                        )
+                    )
+                    .onTapGesture {
+                        shouldRenew = true
+                    }
                 }
             }
             .ignoresSafeArea(edges: .bottom)
