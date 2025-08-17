@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension View {
-    func showSnackbar(
+    func snackbar(
         isReady: Binding<Bool>,
         message: Binding<String>,
         duration: Binding<Snackbar.Duration>
@@ -126,7 +126,7 @@ extension Snackbar {
             }
         )
     }
-    .showSnackbar(
+    .snackbar(
         isReady: $isReady,
         message: $message,
         duration: $duration

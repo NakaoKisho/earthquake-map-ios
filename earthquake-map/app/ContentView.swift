@@ -9,12 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isLoading = false
-    @State var message = "Hello"
+    @State var isSnackbarReady = false
+    @State var message = ""
+    @State var duration = Snackbar.Duration.short
     
     var body: some View {
         NavigationStack {
             MapScreenRoute(
-                isLoading: $isLoading
+                isLoading: $isLoading,
+                isSnackbarReady: $isSnackbarReady,
+                snackbarMessage: $message
             )
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -29,12 +33,11 @@ struct ContentView: View {
                 ignoresSafeAreaEdges: .all
             )
         }
-        .overlay(alignment: .bottom) {
-//            Snackbar(
-//                message: $message,
-//                duration: Snackbar.Duration.short
-//            )
-        }
+        .snackbar(
+            isReady: $isSnackbarReady,
+            message: $message,
+            duration: $duration
+        )
     }
 }
 

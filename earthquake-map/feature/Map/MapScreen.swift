@@ -11,11 +11,16 @@ import SwiftUI
 
 struct MapScreenRoute: View {
     @Binding var isLoading: Bool
+    @Binding var isSnackbarReady: Bool
+    @Binding var snackbarMessage: String
+    
     @ObservedObject private var viewModel = MapScreenViewModel()
     
     var body: some View {
         MapScreen(
             isLoading: $isLoading,
+            isSnackbarReady: $isSnackbarReady,
+            snackbarMessage: $snackbarMessage,
             uiState: $viewModel.uiState
         )
     }
@@ -23,36 +28,59 @@ struct MapScreenRoute: View {
 
 private struct MapScreen: View {
     @Binding var isLoading: Bool
+    @Binding var isSnackbarReady: Bool
+    @Binding var snackbarMessage: String
     @Binding var uiState: MapScreenUIState
+    
+    @State var cameraPosition = MapViewControllerBridge.getDefaultCameraPosition()
+    @State var earthquakes: [Earthquake]?
+    @State var selectedEarthquake: Earthquake?
     @State var zoomInCenter = false
     @State var shouldShowBottomSheet = false
-    @State var markers = [GMSMarker(
-        position: CLLocationCoordinate2D(
-            latitude: 0.0,
-            longitude: 0.0
-        )
-    )]
+    
+    private var markers: [GMSMarker]? {
+        guard let earthquakes else {
+            return nil
+        }
+        
+        return earthquakes.compactMap { earthquake in
+            earthquake.hypocenter?.marker
+        }
+    }
     
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 MapViewControllerBridge(
-                    markers: $markers,
+                    markers: markers,
                     mapViewWillMove: { (isGesture) in
                         guard isGesture else { return }
                         self.zoomInCenter = false
                     },
+                    cameraPosition: $cameraPosition,
+                    earthquakes: $earthquakes,
+                    selectedEarthquake: $selectedEarthquake,
                     shouldShowBottomSheet: $shouldShowBottomSheet
                 )
                 .overlay(alignment: .bottom) {
-                    BottomList(
-                        shouldShowBottomSheet: $shouldShowBottomSheet
-                    )
+                    if let earthquakes = Binding($earthquakes) {
+                        BottomList(
+                            cameraPosition: $cameraPosition,
+                            earthquakes: earthquakes,
+                            selectedEarthquake: $selectedEarthquake,
+                            shouldShowBottomSheet: $shouldShowBottomSheet
+                        )
+                    }
                 }
             }
         }
         .sheet(isPresented: $shouldShowBottomSheet) {
-            BottomSheet()
+            if let selectedEarthquake {
+                BottomSheet(
+                    selectedEarthquake: selectedEarthquake,
+                )
+                .ignoresSafeArea(edges: .bottom)
+            }
         }
         .onChange(of: uiState) {
             switch uiState {
@@ -60,25 +88,33 @@ private struct MapScreen: View {
                     isLoading = true
                 case MapScreenUIState.failed:
                     isLoading = false
-                case MapScreenUIState.succeed(let text):
-                    isLoading = false
+                    isSnackbarReady = true
+                    snackbarMessage = "Unexpected error"
+                    
+                case MapScreenUIState.succeed(let earthquakes):
+                    self.earthquakes = earthquakes
             }
         }
     }
 }
 
 private struct BottomList: View {
+    @Binding var cameraPosition: GMSCameraPosition
+    @Binding var earthquakes: [Earthquake]
+    @Binding var selectedEarthquake: Earthquake?
     @Binding var shouldShowBottomSheet: Bool
     
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack {
-                EarthquakeInfoSummaryCard(
-                    shouldShowBottomSheet: $shouldShowBottomSheet
-                )
-                EarthquakeInfoSummaryCard(
-                    shouldShowBottomSheet: $shouldShowBottomSheet
-                )
+                ForEach($earthquakes) { earthquake in
+                    EarthquakeInfoSummaryCard(
+                        cameraPosition: $cameraPosition,
+                        earthquake: earthquake,
+                        selectedEarthquake: $selectedEarthquake,
+                        shouldShowBottomSheet: $shouldShowBottomSheet
+                    )
+                }
             }
         }
         .frame(
@@ -91,29 +127,42 @@ private struct BottomList: View {
 }
 
 private struct EarthquakeInfoSummaryCard: View {
-    @State var subtitle1 = "2025/08/13 04:10"
-    @State var subtitle2 = "大分県西部"
-    @State var subtitle3 = "2.5"
+    @Binding var cameraPosition: GMSCameraPosition
+    @Binding var earthquake: Earthquake
+    @Binding var selectedEarthquake: Earthquake?
     @Binding var shouldShowBottomSheet: Bool
+    
+    private var hypocenter: Hypocenter? {
+        earthquake.hypocenter
+    }
+    private var time: String {
+        hypocenter?.time ?? "No info"
+    }
+    private var place: String {
+        hypocenter?.place ?? "No info"
+    }
+    private var magnitude: String {
+        hypocenter?.magnitude ?? "No info"
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             EarthquakeInfoCard(
                 imageName: "GIClock",
                 title: "Time of the earthquake",
-                subtitle: subtitle1
+                subtitle: time
             )
             
             EarthquakeInfoCard(
                 imageName: "GIFillMapPin",
                 title: "Hypocenter",
-                subtitle: subtitle1
+                subtitle: place
             )
             
             EarthquakeInfoCard(
                 imageName: "GIFillLandslide",
                 title: "Magnitude",
-                subtitle: subtitle1
+                subtitle: magnitude
             )
         }
         .padding(2)
@@ -122,51 +171,62 @@ private struct EarthquakeInfoSummaryCard: View {
                 .fill(.white)
         )
         .onTapGesture {
+            selectedEarthquake = $earthquake.wrappedValue
+            cameraPosition = MapViewControllerBridge.getCameraPosition(
+                location: $earthquake.wrappedValue.hypocenter?.marker?.position
+            )
             shouldShowBottomSheet = true
         }
     }
 }
 
 private struct BottomSheet: View {
-    @State var subtitle1 = "2025/08/13 04:10"
+    var selectedEarthquake: Earthquake
     @State var shouldExpand = false
+    
+    private var hypocenter: Hypocenter? {
+        selectedEarthquake.hypocenter
+    }
+    private var time: String {
+        hypocenter?.time ?? "No info"
+    }
+    private var place: String {
+        hypocenter?.place ?? "No info"
+    }
+    private var magnitude: String {
+        hypocenter?.magnitude ?? "No info"
+    }
+    private var depth: String {
+        hypocenter?.depth ?? "No info"
+    }
+    private var points: [ObservationPoint]? {
+        selectedEarthquake.observationPoints
+    }
     
     var body: some View {
         ScrollView {
             EarthquakeInfoCard(
                 imageName: "GIClock",
                 title: "Time of the earthquake",
-                subtitle: subtitle1
+                subtitle: time
             )
             
             EarthquakeInfoCard(
                 imageName: "GIFillMapPin",
                 title: "Hypocenter",
-                subtitle: subtitle1
+                subtitle: place
             )
             
             EarthquakeInfoCard(
                 imageName: "GIFillLandslide",
                 title: "Magnitude",
-                subtitle: subtitle1
+                subtitle: magnitude
             )
             
             EarthquakeInfoCard(
                 imageName: "GIFillSolarPower",
                 title: "Depth of the earthquake",
-                subtitle: subtitle1
-            )
-            
-            EarthquakeInfoCard(
-                imageName: "GILanguage",
-                title: "Latitude of the earthquake",
-                subtitle: subtitle1
-            )
-            
-            EarthquakeInfoCard(
-                imageName: "GILanguage",
-                title: "Longitude of the earthquake",
-                subtitle: subtitle1
+                subtitle: depth
             )
             
             ExpandableEarthquakeInfoCard(
@@ -175,91 +235,64 @@ private struct BottomSheet: View {
                 shouldExpand: $shouldExpand
             )
             .onTapGesture {
-                shouldExpand = !shouldExpand
+                withAnimation {
+                    shouldExpand = !shouldExpand
+                }
             }
             
-            ObservationPointList(
-                subtitle: "aaa",
-                shouldExpandParent: $shouldExpand
-            )
+            if let points {
+                ForEach(points) { point in
+                    ObservationPointList(
+                        point: point,
+                        shouldExpandParent: $shouldExpand
+                    )
+                }
+            }
         }
         .padding(10)
         .padding(.top, 30)
         .presentationDetents([
-            .fraction(0.3),
+            .fraction(0.1),
             .fraction(0.8)
         ])
     }
 }
 
 private struct ObservationPointList: View {
-    var subtitle: String
+    var point: ObservationPoint
     @Binding var shouldExpandParent: Bool
     @State private var shouldExpandChildren = false
     
     var body: some View {
-        HStack {
-            Spacer().frame(width: 30)
-            
-            ExpandableEarthquakeInfoCard(
-                imageName: "GIFillMapPin",
-                title: "Seismic intensity observation point name",
-                subtitle: subtitle,
-                shouldExpand: $shouldExpandChildren
-            )
-        }
-        .opacity(shouldExpandParent ? 1 : 0)
-        .animation(.easeInOut(duration: 0.2), value: shouldExpandParent)
-        .onTapGesture {
-            shouldExpandChildren = !shouldExpandChildren
-        }
-        
-        HStack {
-            Spacer().frame(width: 30)
-            Spacer().frame(width: 30)
-            
-            EarthquakeInfoCard(
-                imageName: "GIFillLandslide",
-                title: "Seismic intensity",
-                subtitle: subtitle
-            )
-            .opacity(shouldExpandParent && shouldExpandChildren ? 1 : 0)
-            .animation(
-                .easeInOut(duration: 0.2),
-                value: shouldExpandParent && shouldExpandChildren
-            )
+        if shouldExpandParent {
+            HStack {
+                Spacer().frame(width: 30)
+                
+                ExpandableEarthquakeInfoCard(
+                    imageName: "GIFillMapPin",
+                    title: "Seismic intensity observation point name",
+                    subtitle: point.name,
+                    shouldExpand: $shouldExpandChildren
+                )
+            }
+            .onTapGesture {
+                withAnimation {
+                    shouldExpandChildren = !shouldExpandChildren
+                }
+            }
         }
         
-        HStack {
-            Spacer().frame(width: 30)
-            Spacer().frame(width: 30)
-            
-            EarthquakeInfoCard(
-                imageName: "GILanguage",
-                title: "Latitude of the earthquake",
-                subtitle: subtitle
-            )
-            .opacity(shouldExpandParent && shouldExpandChildren ? 1 : 0)
-            .animation(
-                .easeInOut(duration: 0.2),
-                value: shouldExpandParent && shouldExpandChildren
-            )
-        }
-        
-        HStack {
-            Spacer().frame(width: 30)
-            Spacer().frame(width: 30)
-            
-            EarthquakeInfoCard(
-                imageName: "GILanguage",
-                title: "Longitude of the earthquake",
-                subtitle: subtitle
-            )
-            .opacity(shouldExpandParent && shouldExpandChildren ? 1 : 0)
-            .animation(
-                .easeInOut(duration: 0.2),
-                value: shouldExpandParent && shouldExpandChildren
-            )
+        if shouldExpandParent && shouldExpandChildren {
+            HStack {
+                Spacer().frame(width: 30)
+                Spacer().frame(width: 30)
+                
+                EarthquakeInfoCard(
+                    imageName: "GIFillLandslide",
+                    title: "Seismic intensity",
+                    subtitle: point.scale
+                )
+            }
         }
     }
 }
@@ -331,8 +364,12 @@ private struct ExpandableEarthquakeInfoCard: View {
 
 #Preview {
     @Previewable @State var isLoading = false
+    @Previewable @State var isSnackbarReady = false
+    @Previewable @State var snackbarMessage = ""
     
     MapScreenRoute(
-        isLoading: $isLoading
+        isLoading: $isLoading,
+        isSnackbarReady: $isSnackbarReady,
+        snackbarMessage: $snackbarMessage
     )
 }

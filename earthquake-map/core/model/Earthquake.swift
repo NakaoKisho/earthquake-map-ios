@@ -46,7 +46,8 @@ class Hypocenter {
     }
 }
 
-class ObservationPoint {
+class ObservationPoint: Identifiable {
+    var id = UUID()
     var name: String
     var scale: String
 //    var marker: GMSMarker?
