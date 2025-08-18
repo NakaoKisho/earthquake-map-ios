@@ -6,6 +6,7 @@
 //
 
 import GoogleMaps
+import GoogleMobileAds
 import UIKit
 
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,8 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let googleMapsKey = APIKeyManager.shared.apiKey(for: "GOOGLE_MAPS_API_KEY") else {
             return true
         }
-        
         GMSServices.provideAPIKey(googleMapsKey)
+        
+        MobileAds.shared.start()
+        
         return true
     }
     

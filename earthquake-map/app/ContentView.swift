@@ -5,6 +5,7 @@
 //  Created by 中尾 希翔 on 2025/07/23.
 //
 
+import GoogleMobileAds
 import SwiftUI
 
 struct ContentView: View {
@@ -16,32 +17,36 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            MapScreenRoute(
-                isLoading: $isLoading,
-                isSnackbarReady: $isSnackbarReady,
-                snackbarMessage: $message,
-                shouldRenew: $shouldRenew,
-            )
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Image(
-                        isLoading ? "GIProgressActivity" : "GIRefresh"
-                    )
-                    .rotationEffect(
-                        Angle(
-                            degrees: isLoading ? 90 : 0
+            VStack {
+                BannerContentView()
+                
+                MapScreenRoute(
+                    isLoading: $isLoading,
+                    isSnackbarReady: $isSnackbarReady,
+                    snackbarMessage: $message,
+                    shouldRenew: $shouldRenew,
+                )
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Image(
+                            isLoading ? "GIProgressActivity" : "GIRefresh"
                         )
-                    )
-                    .onTapGesture {
-                        shouldRenew = true
+                        .rotationEffect(
+                            Angle(
+                                degrees: isLoading ? 90 : 0
+                            )
+                        )
+                        .onTapGesture {
+                            shouldRenew = true
+                        }
                     }
                 }
+                .ignoresSafeArea(edges: .bottom)
+                .background(
+                    Color("BarBackground"),
+                    ignoresSafeAreaEdges: .all
+                )
             }
-            .ignoresSafeArea(edges: .bottom)
-            .background(
-                Color("BarBackground"),
-                ignoresSafeAreaEdges: .all
-            )
         }
         .snackbar(
             isReady: $isSnackbarReady,

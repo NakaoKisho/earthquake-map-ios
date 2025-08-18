@@ -16,28 +16,36 @@ PODS:
     - GoogleMaps
   - Google-Maps-iOS-Utils/QuadTree (3.4.0):
     - GoogleMaps
+  - Google-Mobile-Ads-SDK (12.9.0):
+    - GoogleUserMessagingPlatform (>= 1.1)
   - GoogleMaps (6.1.0):
     - GoogleMaps/Maps (= 6.1.0)
   - GoogleMaps/Base (6.1.0)
   - GoogleMaps/Maps (6.1.0):
     - GoogleMaps/Base
+  - GoogleUserMessagingPlatform (3.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - Google-Maps-iOS-Utils (= 3.4.0)
+  - Google-Mobile-Ads-SDK
   - GoogleMaps (= 6.1.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Google-Maps-iOS-Utils
+    - Google-Mobile-Ads-SDK
     - GoogleMaps
+    - GoogleUserMessagingPlatform
 
 SPEC CHECKSUMS:
   Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
   Google-Maps-iOS-Utils: 2b4971019b7e9b3c92b4635d218552d9e093df4b
+  Google-Mobile-Ads-SDK: 36cce7d8dc1b615145d02491c8bf5640ef854e7c
   GoogleMaps: cffc5d24ce920063aaeebe6ac4dbaaca1dd7f377
+  GoogleUserMessagingPlatform: f8d0cdad3ca835406755d0a69aa634f00e76d576
 
-PODFILE CHECKSUM: 4ab7a4cdd383af33bc754eac856919e76ff96e04
+PODFILE CHECKSUM: 6b49d5c26d757d5d01c48f3807dfbe8883746988
 
 COCOAPODS: 1.16.2

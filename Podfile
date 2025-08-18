@@ -9,6 +9,7 @@ target 'earthquake-map' do
   pod 'GoogleMaps', '6.1.0'
   pod 'Google-Maps-iOS-Utils', '3.4.0'
   pod 'Alamofire'
+  pod 'Google-Mobile-Ads-SDK'
 
   target 'earthquake-mapTests' do
     inherit! :search_paths
