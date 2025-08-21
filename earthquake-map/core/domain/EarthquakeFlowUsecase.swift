@@ -19,14 +19,14 @@ final class EarthquakeFlowUsecase {
                     time: jmaQuake.earthquake.time,
                     place: jmaHypocenter?.name,
                     magnitude:
-                        jmaHypocenter?.magnitude.map { String($0) },
+                        jmaHypocenter?.magnitude.map { $0 },
                     depth: jmaHypocenter?.depth.map { String($0) },
                     marker: getMarker(jmaHypocenter: jmaHypocenter)
                 )
                 let points = jmaQuake.points?.map { point in
                     ObservationPoint(
                         name: point.addr,
-                        scale: String(point.scale)
+                        scale: point.scale
                     )
                 }
                 

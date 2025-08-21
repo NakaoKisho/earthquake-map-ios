@@ -18,17 +18,6 @@
         }
       }
     },
-    "Failed" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "削除対象"
-          }
-        }
-      }
-    },
     "Hypocenter" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -36,6 +25,74 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "震源地"
+          }
+        }
+      }
+    },
+    "Intensity %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "Intensity %lld lower" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld lower"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld弱"
+          }
+        }
+      }
+    },
+    "Intensity %lld lower or more" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld lower or more"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld弱以上"
+          }
+        }
+      }
+    },
+    "Intensity %lld upper" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld upper"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld強"
           }
         }
       }
@@ -53,17 +110,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "緯度"
-          }
-        }
-      }
-    },
-    "Loading" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "読み込み中"
           }
         }
       }
@@ -154,17 +200,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "地点名"
-          }
-        }
-      }
-    },
-    "text.text" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "削除対象"
           }
         }
       }

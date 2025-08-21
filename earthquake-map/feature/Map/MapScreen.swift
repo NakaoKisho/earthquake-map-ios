@@ -288,6 +288,32 @@ private struct ObservationPointList: View {
     var point: ObservationPoint
     @Binding var shouldExpandParent: Bool
     @State private var shouldExpandChildren = false
+    private var scale: LocalizedStringKey {
+        switch point.scale {
+            case 10:
+                "Intensity \(1)"
+            case 20:
+                "Intensity \(2)"
+            case 30:
+                "Intensity \(3)"
+            case 40:
+                "Intensity \(4)"
+            case 45:
+                "Intensity \(5) lower"
+            case 46:
+                "Intensity \(5) lower or more"
+            case 50:
+                "Intensity \(5) upper"
+            case 55:
+                "Intensity \(6) lower"
+            case 60:
+                "Intensity \(6) upper"
+            case 70:
+                "Intensity \(7)"
+            default:
+                "No info"
+        }
+    }
     
     var body: some View {
         if shouldExpandParent {
@@ -316,7 +342,7 @@ private struct ObservationPointList: View {
                 EarthquakeInfoCard(
                     imageName: "GIFillLandslide",
                     title: "Seismic intensity",
-                    subtitle: point.scale
+                    subtitle: scale
                 )
             }
         }
@@ -324,9 +350,29 @@ private struct ObservationPointList: View {
 }
 
 private struct EarthquakeInfoCard: View {
-    var imageName: String
-    var title: LocalizedStringKey
-    var subtitle: String
+    private var imageName: String
+    private var title: LocalizedStringKey
+    private var subtitle: Text
+    
+    init(
+        imageName: String,
+        title: LocalizedStringKey,
+        subtitle: LocalizedStringKey
+    ) {
+        self.imageName = imageName
+        self.title = title
+        self.subtitle = Text(subtitle)
+    }
+    
+    init(
+        imageName: String,
+        title: LocalizedStringKey,
+        subtitle: String
+    ) {
+        self.imageName = imageName
+        self.title = title
+        self.subtitle = Text(subtitle)
+    }
     
     var body: some View {
         IconText(
@@ -341,7 +387,7 @@ private struct EarthquakeInfoCard: View {
                     Text(title)
                         .font(.headline)
                         .padding(.bottom, 2)
-                    Text(subtitle)
+                    Text("\(subtitle)")
                 }
                 
                 Spacer()

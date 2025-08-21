@@ -34,27 +34,39 @@ class Hypocenter {
     init(
         time: String,
         place: String?,
-        magnitude: String?,
+        magnitude: Double?,
         depth: String?,
         marker: GMSMarker?
     ) {
         self.time = time
         self.place = place
-        self.magnitude = magnitude
+        self.magnitude = toMagnitude(magnitude)
         self.depth = depth
         self.marker = marker
+    }
+    
+    private func toMagnitude(_ magnitude: Double?) -> String? {
+        guard let magnitude else {
+            return nil
+        }
+        
+        return if magnitude == -1 {
+            nil
+        } else {
+            String(magnitude)
+        }
     }
 }
 
 class ObservationPoint: Identifiable {
     var id = UUID()
     var name: String
-    var scale: String
+    var scale: Int
 //    var marker: GMSMarker?
     
     init(
         name: String,
-        scale: String,
+        scale: Int,
 //        marker: GMSMarker?
     ) {
         self.name = name
