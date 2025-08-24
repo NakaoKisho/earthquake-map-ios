@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+
+    },
     "Depth of the earthquake" : {
       "extractionState" : "manual",
       "localizations" : {
